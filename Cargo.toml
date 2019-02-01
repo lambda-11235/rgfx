@@ -1,0 +1,6 @@
+[package]
+name = "logfx"
+version = "0.1.0"
+authors = ["Taran Lynn <taranlynn0@gmail.com>"]
+
+[dependencies]
