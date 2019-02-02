@@ -1,11 +1,5 @@
 
+pub mod draw;
 pub mod format;
 pub mod image;
-
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
-    }
-}
+pub mod transform;
