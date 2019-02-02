@@ -1,5 +1,6 @@
 [package]
-name = "logfx"
+name = "rgfx"
+description = "A simple raster graphics library for Rust."
 version = "0.1.0"
 authors = ["Taran Lynn <taranlynn0@gmail.com>"]
 

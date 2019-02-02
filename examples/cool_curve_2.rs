@@ -1,10 +1,9 @@
 
+extern crate rgfx;
 
-extern crate logfx;
-
-use logfx::format::*;
-use logfx::image::*;
-use logfx::transform;
+use rgfx::format::*;
+use rgfx::image::*;
+use rgfx::transform;
 
 use std::fs::File;
 
