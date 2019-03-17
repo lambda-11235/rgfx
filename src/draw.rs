@@ -54,8 +54,16 @@ pub fn triangle(img: &mut Image, p1: Point, p2: Point, p3: Point, color: Color) 
     let (m3, b3) = mid.slope_inter(high);
 
     for y in low.y..mid.y {
-        let x1 = (((y as f32) - b1)/m1) as usize;
-        let x2 = (((y as f32) - b2)/m2) as usize;
+        let mut x1 = (((y as f32) - b1)/m1) as usize;
+        let mut x2 = (((y as f32) - b2)/m2) as usize;
+
+        if x1 > img.get_width() {
+            x1 = img.get_width();
+        }
+
+        if x2 > img.get_width() {
+            x2 = img.get_width();
+        }
 
         for x in x1.min(x2)..x1.max(x2) {
             if x < img.get_width() && y < img.get_height() {
@@ -65,8 +73,16 @@ pub fn triangle(img: &mut Image, p1: Point, p2: Point, p3: Point, color: Color) 
     }
 
     for y in mid.y..high.y {
-        let x1 = (((y as f32) - b2)/m2) as usize;
-        let x2 = (((y as f32) - b3)/m3) as usize;
+        let mut x1 = (((y as f32) - b2)/m2) as usize;
+        let mut x2 = (((y as f32) - b3)/m3) as usize;
+
+        if x1 > img.get_width() {
+            x1 = img.get_width();
+        }
+
+        if x2 > img.get_width() {
+            x2 = img.get_width();
+        }
 
         for x in x1.min(x2)..x1.max(x2) {
             if x < img.get_width() && y < img.get_height() {

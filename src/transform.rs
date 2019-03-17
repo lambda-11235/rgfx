@@ -18,7 +18,7 @@ pub fn simple_blur(img: &mut Image, factor: u32) {
                     for yp in (y as isize - 1)..=(y as isize + 1) {
                         let mut xpp = if xp < 0 { 0 } else { xp as usize };
                         let mut ypp = if yp < 0 { 0 } else { yp as usize };
-                        
+
                         if xpp >= img.get_width() {
                             xpp = img.get_width() - 1;
                         }
@@ -52,6 +52,48 @@ pub fn simple_blur(img: &mut Image, factor: u32) {
             }
         }
     }
+}
+
+
+/// Scales and image down by a given factor.
+pub fn scale_down(img: &mut Image, factor: usize) {
+    let mut new_img = Image::new(img.get_width()/factor, img.get_height()/factor);
+
+    for x in 0..new_img.get_width() {
+        for y in 0..new_img.get_height() {
+            let mut red: usize = 0;
+            let mut green: usize = 0;
+            let mut blue: usize = 0;
+            let mut cnt: usize = 0;
+
+            for dx in 0..factor {
+                for dy in 0..factor {
+                    let xp = factor*x + dx;
+                    let yp = factor*y + dy;
+
+                    let c: Color = img.at_imm(Point{x: xp, y: yp});
+                    red += c.red as usize;
+                    green += c.green as usize;
+                    blue += c.blue as usize;
+
+                    cnt += 1;
+                }
+            }
+
+            red /= cnt;
+            green /= cnt;
+            blue /= cnt;
+
+            *new_img.at(Point{x: x, y: y}) = Color{
+                red: red as u8,
+                green: green as u8,
+                blue: blue as u8
+            };
+
+        }
+    }
+
+    *img = new_img;
 }
 
 

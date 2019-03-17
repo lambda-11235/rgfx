@@ -7,6 +7,10 @@ use rgfx::transform;
 
 use std::fs::File;
 
+const WIDTH: usize = 1920;
+const HEIGHT: usize = 1080;
+const SMOOTH_FACTOR: u32 = 32;
+
 
 fn calc(rad: f32, ang: f32, _color: Color, _img: &Image) -> Color {
     let mut r = rad - ang;
@@ -27,10 +31,10 @@ fn calc(rad: f32, ang: f32, _color: Color, _img: &Image) -> Color {
 
 
 pub fn main() {
-    let mut img = Image::new(1920, 1080);
+    let mut img = Image::new(WIDTH, HEIGHT);
 
     transform::map_polar(&mut img, calc);
-    transform::simple_blur(&mut img, 8);
+    transform::simple_blur(&mut img, SMOOTH_FACTOR);
 
     let mut file = File::create("cool_curve.ppm").unwrap();
     write_ppm(&img, &mut file).unwrap();
