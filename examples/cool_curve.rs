@@ -9,7 +9,7 @@ use std::fs::File;
 
 const WIDTH: usize = 1920;
 const HEIGHT: usize = 1080;
-const SMOOTH_FACTOR: u32 = 32;
+const SSAA: usize = 8;
 
 
 fn calc(rad: f32, ang: f32, _color: Color, _img: &Image) -> Color {
@@ -31,10 +31,10 @@ fn calc(rad: f32, ang: f32, _color: Color, _img: &Image) -> Color {
 
 
 pub fn main() {
-    let mut img = Image::new(WIDTH, HEIGHT);
+    let mut img = Image::new(SSAA*WIDTH, SSAA*HEIGHT);
 
     transform::map_polar(&mut img, calc);
-    transform::simple_blur(&mut img, SMOOTH_FACTOR);
+    transform::scale_down(&mut img, SSAA);
 
     let mut file = File::create("cool_curve.ppm").unwrap();
     write_ppm(&img, &mut file).unwrap();
